@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="650.0" prefWidth="1050.0" style="-fx-background-color: #800000;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" layoutX="50.0" layoutY="45.0" prefHeight="560.0" prefWidth="950.0" spacing="30.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFCC00; -fx-border-width: 8; -fx-border-radius: 10; -fx-background-radius: 18;" AnchorPane.bottom.to="45.0" AnchorPane.left.to="50.0" AnchorPane.right.to="50.0" AnchorPane.top.to="45.0">
+      <VBox alignment="CENTER" layoutX="50.0" layoutY="45.0" prefHeight="560.0" prefWidth="950.0" spacing="30.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #FFCC00; -fx-border-width: 8; -fx-border-radius: 10; -fx-background-radius: 18;" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="45.0">
          <padding>
             <Insets bottom="40.0" left="50.0" right="50.0" top="40.0" />
          </padding>
@@ -41,7 +41,7 @@
                </VBox.margin>
             </VBox>
             
-            <VBox alignment="CENTER" prefWidth="420.0" spacing="18.0" fillWidth="false">
+            <VBox alignment="CENTER" prefWidth="420.0" fillWidth="false" spacing="18.0">
                <children>
                   
                   <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="380.0" style="-fx-background-color: #800000; -fx-background-radius: 25; -fx-border-color: #FFCC00; -fx-border-radius: 25; -fx-border-width: 2;" text="USER" textFill="WHITE">
