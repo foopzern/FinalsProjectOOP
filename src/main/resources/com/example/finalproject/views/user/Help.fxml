@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="TOP_CENTER" spacing="40.0" style="-fx-background-color: #F4F4F6;" BorderPane.alignment="CENTER">
+         <padding><Insets top="60.0" left="40.0" right="40.0" /></padding>
+         <children>
+            <VBox alignment="CENTER" spacing="10.0">
+               <children>
+                  <Label text="How to Use FindIT?" textFill="#800000">
+                     <font><Font name="System Bold" size="36.0" /></font>
+                  </Label>
+                  <Label text="Lost something on campus? Found someone's belongings? Here's how our system works." textAlignment="CENTER" wrapText="true" textFill="#444444">
+                     <font><Font size="18.0" /></font>
+                  </Label>
+               </children>
+            </VBox>
+
+            <HBox spacing="25.0" alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefWidth="280.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                     <padding><Insets bottom="30.0" left="20.0" right="20.0" top="30.0" /></padding>
+                     <children>
+                        <Circle fill="#800000" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Circle fill="#FFCC00" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Label text="Search for Your Lost Item" textAlignment="CENTER" wrapText="true"><font><Font name="System Bold" size="16.0" /></font></Label>
+                        <Label text="Browse our database of found items to see if someone has turned in your lost item" textAlignment="CENTER" wrapText="true" textFill="#666666" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefWidth="280.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                     <padding><Insets bottom="30.0" left="20.0" right="20.0" top="30.0" /></padding>
+                     <children>
+                        <Circle fill="#800000" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Circle fill="#FFCC00" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Label text="Report Your Lost Item" textAlignment="CENTER" wrapText="true"><font><Font name="System Bold" size="16.0" /></font></Label>
+                        <Label text="If you can't find your item, submit a lost item report with detailed description" textAlignment="CENTER" wrapText="true" textFill="#666666" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefWidth="280.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                     <padding><Insets bottom="30.0" left="20.0" right="20.0" top="30.0" /></padding>
+                     <children>
+                        <Circle fill="#800000" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Circle fill="#FFCC00" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Label text="Claim Your Item" textAlignment="CENTER" wrapText="true"><font><Font name="System Bold" size="16.0" /></font></Label>
+                        <Label text="Visit the Lost &amp; Found office with valid ID to verify ownership and claim your item" textAlignment="CENTER" wrapText="true" textFill="#666666" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
