@@ -22,7 +22,7 @@
                <children>
                   <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/logo%20white%20bg.png" />
+                        <Image url="@../../assets/LogoWhite.png" />
                      </image></ImageView>
                </children>
             </StackPane>

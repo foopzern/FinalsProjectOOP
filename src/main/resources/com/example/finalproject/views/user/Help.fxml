@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,7 +12,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1"> <left>
+        <fx:include source="DashboardSidebar.fxml" />
+    </left>
    <center>
       <VBox alignment="TOP_CENTER" spacing="40.0" style="-fx-background-color: #F4F4F6;" BorderPane.alignment="CENTER">
          <padding><Insets left="40.0" right="40.0" top="60.0" /></padding>
@@ -37,8 +40,11 @@
                               <Circle fill="#800000" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                               <ImageView fitHeight="37.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../assets/search.jpg" />
+                                    <Image url="@../../assets/search.png" />
                                  </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
                               </ImageView>
                            </children>
                         </StackPane>
@@ -64,8 +70,11 @@
                               <Circle fill="#800000" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                               <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../assets/report.jpg" />
+                                    <Image url="@../../assets/report.png" />
                                  </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
                               </ImageView>
                            </children>
                         </StackPane>
@@ -91,8 +100,11 @@
                               <Circle fill="#800000" radius="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                               <ImageView fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../assets/claim.jpg" />
+                                    <Image url="@../../assets/claim.png" />
                                  </image>
+                                 <effect>
+                                    <ColorAdjust brightness="1.0" />
+                                 </effect>
                               </ImageView>
                            </children>
                         </StackPane>
