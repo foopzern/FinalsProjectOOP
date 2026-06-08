@@ -1,10 +1,11 @@
 module com.example.workshopoop {
-    requires javafx.controls;
-    requires javafx.fxml;
+    requires transitive javafx.controls;
+    requires transitive javafx.fxml;
+    requires transitive java.sql;
 
-    opens com.example.finalproject to javafx.fxml;
-    exports com.example.finalproject;
+    opens com.example.findit to javafx.fxml;
+    exports com.example.findit;
 
-    opens com.example.finalproject.controllers to javafx.fxml;
-    exports com.example.finalproject.controllers;
+    opens com.example.findit.controllers to javafx.fxml;
+    exports com.example.findit.controllers;
 }

@@ -1,4 +1,4 @@
-package com.example.finalproject.controllers;
+package com.example.findit.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ public class AdminLoginController {
     @FXML
     public void goBackToMain(ActionEvent event) {
         // Routes the user back to the Main Portal
-        switchScene(event, "/com/example/finalproject/views/user/MainPortal.fxml");
+        switchScene(event, "/com/example/findit/views/user/MainPortal.fxml");
     }
 
     // This method handles the "Login" button

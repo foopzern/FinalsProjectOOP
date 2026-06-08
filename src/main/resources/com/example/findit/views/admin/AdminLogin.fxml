@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalproject.controllers.AdminLoginController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FAFAFA;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.AdminLoginController">
    <children>
       <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBackToMain" style="-fx-background-color: transparent;" text="← Back" textFill="#800000">
          <font><Font name="System Bold" size="16.0" /></font>

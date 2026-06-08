@@ -1,4 +1,4 @@
-package com.example.finalproject.controllers;
+package com.example.findit.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +14,13 @@ public class MainPortalController {
     @FXML
     public void goToUserDashboard(ActionEvent event) {
         // Points to the User Dashboard FXML
-        switchScene(event, "/com/example/finalproject/views/user/Dashboard.fxml");
+        switchScene(event, "/com/example/findit/views/user/Dashboard.fxml");
     }
 
     @FXML
     public void goToAdminLogin(ActionEvent event) {
         // Points to the Admin Login FXML
-        switchScene(event, "/com/example/finalproject/views/admin/AdminLogin.fxml");
+        switchScene(event, "/com/findit/views/admin/AdminLogin.fxml");
     }
 
     private void switchScene(ActionEvent event, String fxmlPath) {

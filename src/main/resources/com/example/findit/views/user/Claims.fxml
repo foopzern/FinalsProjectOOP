@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.UserDashboardController">
+   
+   <left>
+      <fx:include source="DashboardSidebar.fxml" />
+   </left>
+   
+   <center>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="80.0" style="-fx-background-color: #800000; -fx-padding: 0 0 0 30;">
+               <children>
+                  <Label text="Claims" textFill="#FFCC00" style="-fx-font-size: 26; -fx-font-weight: bold;" />
+               </children>
+            </HBox>
+            
+            <VBox spacing="20.0" style="-fx-padding: 25 30 25 30;" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); -fx-padding: 15 20 15 20;">
+                     <children>
+                        <TextField promptText="🔍 Search items ..." style="-fx-background-color: transparent; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-padding: 8;" HBox.hgrow="ALWAYS" />
+                        <ComboBox prefWidth="240.0" promptText="All Status" style="-fx-background-color: transparent; -fx-border-color: #CCCCCC; -fx-border-radius: 8; -fx-padding: 5;" />
+                     </children>
+                  </HBox>
+                  
+                  <FlowPane hgap="20.0" vgap="20.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox prefHeight="220.0" prefWidth="175.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); -fx-padding: 15;">
+                           <children>
+                              <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#E2E2E6" height="90.0" stroke="TRANSPARENT" width="145.0" />
+                              <Label text="Item Name" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                              <Label text="Category:" textFill="#777777" style="-fx-font-size: 11;" />
+                              <Label text="Date:" textFill="#777777" style="-fx-font-size: 11;" />
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: #A3E4D7; -fx-background-radius: 8; -fx-text-fill: #117A65; -fx-font-size: 11; -fx-font-weight: bold;" text="Matched" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox prefHeight="220.0" prefWidth="175.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); -fx-padding: 15;">
+                           <children>
+                              <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#E2E2E6" height="90.0" stroke="TRANSPARENT" width="145.0" />
+                              <Label text="Item Name" style="-fx-font-weight: bold; -fx-font-size: 14;" />
+                              <Label text="Category:" textFill="#777777" style="-fx-font-size: 11;" />
+                              <Label text="Date:" textFill="#777777" style="-fx-font-size: 11;" />
+                              <Label alignment="CENTER" prefHeight="22.0" prefWidth="80.0" style="-fx-background-color: #D4E6F1; -fx-background-radius: 8; -fx-text-fill: #2471A3; -fx-font-size: 11; -fx-font-weight: bold;" text="Claimed" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </FlowPane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

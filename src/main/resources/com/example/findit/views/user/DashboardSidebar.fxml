@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="220.0" style="-fx-background-color: #800000;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.finalproject.controllers.UserDashboardController">
+<VBox prefWidth="220.0" style="-fx-background-color: #800000;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.UserDashboardController">
     <children>
         <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="10.0">
             <padding>
@@ -43,7 +43,7 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgNavDashboard" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/dashboard.png" />
                      </image>
@@ -59,13 +59,10 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgNavItems" fitHeight="68.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/dashboard.png" />
+                        <Image url="@../../assets/Items.png" />
                      </image>
-                     <effect>
-                        <ColorAdjust brightness="1.0" />
-                     </effect>
                   </ImageView>
                </graphic>
                 </Button>
@@ -75,7 +72,7 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgNavClaims" fitHeight="38.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/reportSidebar.png" />
                      </image>
@@ -98,7 +95,7 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgNavHelp" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../assets/help.png" />
                      </image>
