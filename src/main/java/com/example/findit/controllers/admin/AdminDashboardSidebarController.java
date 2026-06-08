@@ -1,4 +1,4 @@
-package com.example.findit.controllers;
+package com.example.findit.controllers.admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

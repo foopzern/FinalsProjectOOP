@@ -1,4 +1,4 @@
-package com.example.findit.controllers;
+package com.example.findit.controllers.admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

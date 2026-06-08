@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefWidth="220.0" style="-fx-background-color: #800000;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.UserDashboardController">
+<VBox prefWidth="220.0" style="-fx-background-color: #800000;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.user.UserDashboardController">
     <children>
         <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="10.0">
             <padding>

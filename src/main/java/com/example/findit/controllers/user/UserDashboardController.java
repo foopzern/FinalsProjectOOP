@@ -1,4 +1,4 @@
-package com.example.findit.controllers;
+package com.example.findit.controllers.user;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +41,17 @@ public class UserDashboardController {
         }
     }
     // This method resets all sidebar buttons to the default "inactive" style
+    // --- BULLETPROOF IMAGE LOADER ---
+    // This safely tries to load an image. If it fails, it prints a helpful error instead of crashing the app!
+    private Image safeLoadImage(String path) {
+        var resourceStream = getClass().getResourceAsStream(path);
+        if (resourceStream == null) {
+            System.err.println("❌ MISSING IMAGE: Java cannot find -> " + path);
+            return null; // Returning null prevents the NullPointerException crash!
+        }
+        return new Image(resourceStream);
+    }
+
     private void resetSidebarStyles() {
         String defaultStyle = "-fx-background-color: transparent; -fx-text-fill: #FFFFFF; -fx-cursor: hand; -fx-border-color: transparent;";
         btnNavDashboard.setStyle(defaultStyle);
@@ -48,34 +59,32 @@ public class UserDashboardController {
         btnNavClaims.setStyle(defaultStyle);
         btnNavHelp.setStyle(defaultStyle);
 
-
-        imgNavDashboard.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/dashboard.png")));
-        imgNavItems.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/items.png")));
-        imgNavClaims.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/report.png"))); 
-        imgNavHelp.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/help.png")));
+        // Uses the safe loader!
+        imgNavDashboard.setImage(safeLoadImage("/com/example/findit/assets/dashboard.png"));
+        imgNavItems.setImage(safeLoadImage("/com/example/findit/assets/items.png"));
+        imgNavClaims.setImage(safeLoadImage("/com/example/findit/assets/report.png")); 
+        imgNavHelp.setImage(safeLoadImage("/com/example/findit/assets/help.png"));
     }
 
     private void highlightActiveTab() {
-        // The yellow border CSS
         String activeStyle = "-fx-background-color: transparent; -fx-text-fill: #FFCC00; -fx-cursor: hand; -fx-border-color: transparent transparent transparent #FFCC00; -fx-border-width: 0 0 0 4; -fx-padding: 0 0 0 4;";
 
-        // Apply the CSS and swap to the YELLOW icon for the active page
         switch (activePage) {
             case "Dashboard":
                 btnNavDashboard.setStyle(activeStyle);
-                imgNavDashboard.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/yellow_icons/dashboard.png")));
+                imgNavDashboard.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/dashboard.png"));
                 break;
             case "Items":
                 btnNavItems.setStyle(activeStyle);
-                imgNavItems.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/yellow_icons/items.png")));
+                imgNavItems.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/Items.png"));
                 break;
             case "Claims":
                 btnNavClaims.setStyle(activeStyle);
-                imgNavClaims.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/yellow_icons/report.png")));
+                imgNavClaims.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/report.png"));
                 break;
             case "Help":
                 btnNavHelp.setStyle(activeStyle);
-                imgNavHelp.setImage(new Image(getClass().getResourceAsStream("/com/example/findit/assets/yellow_icons/help.png")));
+                imgNavHelp.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/help.png"));
                 break;
         }
     }

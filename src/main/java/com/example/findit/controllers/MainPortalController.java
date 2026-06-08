@@ -20,7 +20,7 @@ public class MainPortalController {
     @FXML
     public void goToAdminLogin(ActionEvent event) {
         // Points to the Admin Login FXML
-        switchScene(event, "/com/findit/views/admin/AdminLogin.fxml");
+        switchScene(event, "/com/example/findit/views/admin/AdminLogin.fxml");
     }
 
     private void switchScene(ActionEvent event, String fxmlPath) {
