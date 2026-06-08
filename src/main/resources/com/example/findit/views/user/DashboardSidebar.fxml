@@ -47,9 +47,6 @@
                      <image>
                         <Image url="@../../assets/dashboard.png" />
                      </image>
-                     <effect>
-                        <ColorAdjust brightness="1.0" />
-                     </effect>
                   </ImageView>
                </graphic>
                 </Button>
@@ -61,7 +58,7 @@
                <graphic>
                   <ImageView fx:id="imgNavItems" fitHeight="68.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../assets/Items.png" />
+                        <Image url="@../../assets/ItemReportedAdmin.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -76,9 +73,6 @@
                      <image>
                         <Image url="@../../assets/reportSidebar.png" />
                      </image>
-                     <effect>
-                        <ColorAdjust brightness="1.0" />
-                     </effect>
                   </ImageView>
                </graphic>
                 </Button>
@@ -99,9 +93,6 @@
                      <image>
                         <Image url="@../../assets/help.png" />
                      </image>
-                     <effect>
-                        <ColorAdjust brightness="1.0" />
-                     </effect>
                   </ImageView>
                </graphic>
                 </Button>

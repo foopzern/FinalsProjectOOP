@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
+import javafx.scene.effect.ColorAdjust;
 
 import java.io.IOException;
 
@@ -40,14 +41,12 @@ public class UserDashboardController {
             highlightActiveTab();
         }
     }
-    // This method resets all sidebar buttons to the default "inactive" style
-    // --- BULLETPROOF IMAGE LOADER ---
-    // This safely tries to load an image. If it fails, it prints a helpful error instead of crashing the app!
+    
     private Image safeLoadImage(String path) {
         var resourceStream = getClass().getResourceAsStream(path);
         if (resourceStream == null) {
             System.err.println("❌ MISSING IMAGE: Java cannot find -> " + path);
-            return null; // Returning null prevents the NullPointerException crash!
+            return null; 
         }
         return new Image(resourceStream);
     }
@@ -59,32 +58,47 @@ public class UserDashboardController {
         btnNavClaims.setStyle(defaultStyle);
         btnNavHelp.setStyle(defaultStyle);
 
-        // Uses the safe loader!
+        // 1. Load the raw black PNGs
         imgNavDashboard.setImage(safeLoadImage("/com/example/findit/assets/dashboard.png"));
-        imgNavItems.setImage(safeLoadImage("/com/example/findit/assets/items.png"));
+        imgNavItems.setImage(safeLoadImage("/com/example/findit/assets/Items.png"));
         imgNavClaims.setImage(safeLoadImage("/com/example/findit/assets/report.png")); 
         imgNavHelp.setImage(safeLoadImage("/com/example/findit/assets/help.png"));
+
+        // 2. Create the white effect
+        ColorAdjust makeWhite = new ColorAdjust();
+        makeWhite.setBrightness(1.0);
+
+        // 3. Apply the white effect to all inactive icons
+        imgNavDashboard.setEffect(makeWhite);
+        imgNavItems.setEffect(makeWhite);
+        imgNavClaims.setEffect(makeWhite);
+        imgNavHelp.setEffect(makeWhite);
     }
 
     private void highlightActiveTab() {
         String activeStyle = "-fx-background-color: transparent; -fx-text-fill: #FFCC00; -fx-cursor: hand; -fx-border-color: transparent transparent transparent #FFCC00; -fx-border-width: 0 0 0 4; -fx-padding: 0 0 0 4;";
 
+        // Apply the yellow styling, swap the image, and REMOVE the white effect
         switch (activePage) {
             case "Dashboard":
                 btnNavDashboard.setStyle(activeStyle);
                 imgNavDashboard.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/dashboard.png"));
+                imgNavDashboard.setEffect(null); // Removes the white filter!
                 break;
             case "Items":
                 btnNavItems.setStyle(activeStyle);
-                imgNavItems.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/Items.png"));
+                imgNavItems.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/items.png"));
+                imgNavItems.setEffect(null); 
                 break;
             case "Claims":
                 btnNavClaims.setStyle(activeStyle);
                 imgNavClaims.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/report.png"));
+                imgNavClaims.setEffect(null); 
                 break;
             case "Help":
                 btnNavHelp.setStyle(activeStyle);
                 imgNavHelp.setImage(safeLoadImage("/com/example/findit/assets/yellow_icons/help.png"));
+                imgNavHelp.setEffect(null); 
                 break;
         }
     }
@@ -137,10 +151,10 @@ public class UserDashboardController {
     // --- 5. REUSABLE SCENE SWITCHER ---
     private void switchScene(ActionEvent event, String fxmlPath) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            Parent newRoot = FXMLLoader.load(getClass().getResource(fxmlPath));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            stage.getScene().setRoot(newRoot);
+            
         } catch (IOException e) {
             System.err.println("CRITICAL ERROR: Could not load the FXML file at " + fxmlPath);
             e.printStackTrace();
