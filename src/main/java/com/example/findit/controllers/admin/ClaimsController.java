@@ -7,9 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.image.ImageView;
 
 public class ClaimsController implements Initializable {
 
@@ -65,14 +66,28 @@ public class ClaimsController implements Initializable {
             }
         });
         colAction.setCellFactory(col -> new TableCell<>() {
-            private final Button approveBtn = new Button("✔");
-            private final Button rejectBtn  = new Button("✖");
-            private final Button deleteBtn  = new Button("🗑");
+            private final Button approveBtn = new Button();
+            private final Button rejectBtn  = new Button();
+            private final Button deleteBtn  = new Button();
 
             {
-                approveBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #2E7D32; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;");
-                rejectBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #C62828; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;");
-                deleteBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #D32F2F; -fx-font-size: 18px; -fx-cursor: hand;");
+                // Load your specific images
+                ImageView checkIcon = createIcon("/com/example/findit/assets/check.png");
+                ImageView ekisIcon  = createIcon("/com/example/findit/assets/ekis.png");
+                ImageView trashIcon = createIcon("/com/example/findit/assets/trash.png");
+
+                // Inject the images into the buttons
+                approveBtn.setGraphic(checkIcon);
+                rejectBtn.setGraphic(ekisIcon);
+                deleteBtn.setGraphic(trashIcon);
+
+                // Make the button backgrounds completely transparent and add a pointer cursor
+                String transparentStyle = "-fx-background-color: transparent; -fx-cursor: hand;";
+                approveBtn.setStyle(transparentStyle);
+                rejectBtn.setStyle(transparentStyle);
+                deleteBtn.setStyle(transparentStyle);
+
+                // Wiring the click actions
                 approveBtn.setOnAction(e -> handleApprove(getTableView().getItems().get(getIndex())));
                 rejectBtn.setOnAction(e  -> handleReject(getTableView().getItems().get(getIndex())));
                 deleteBtn.setOnAction(e  -> handleDeleteItem(getTableView().getItems().get(getIndex())));
@@ -151,6 +166,18 @@ public class ClaimsController implements Initializable {
         claimsTable.refresh();
     }
 
+    private ImageView createIcon(String path) {
+        java.io.InputStream stream = getClass().getResourceAsStream(path);
+        if (stream == null) {
+            System.err.println("❌ Missing table icon: " + path);
+            return new ImageView(); // Returns empty view to prevent crashes
+        }
+        ImageView imgView = new ImageView(new Image(stream));
+        imgView.setFitWidth(20);  // Size of the icon
+        imgView.setFitHeight(20);
+        imgView.setPreserveRatio(true);
+        return imgView;
+    }
     public static class ClaimRow {
         private final String type, itemName, category, date, reportedBy, location;
         private String claimStatus;

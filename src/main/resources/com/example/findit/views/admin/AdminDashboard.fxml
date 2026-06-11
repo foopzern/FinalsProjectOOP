@@ -33,9 +33,6 @@
                      <HBox.margin> <Insets left="25.0" /> </HBox.margin>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Circle fill="#A2C4C9" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
-                     <HBox.margin> <Insets right="25.0" /> </HBox.margin>
-                  </Circle>
                </children>
             </HBox>
          </top>

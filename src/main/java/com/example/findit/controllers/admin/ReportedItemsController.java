@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class ReportedItemsController implements Initializable {
 
@@ -63,13 +65,18 @@ public class ReportedItemsController implements Initializable {
         });
 
         colAction.setCellFactory(col -> new TableCell<>() {
-            private final Button viewBtn = new Button("View");
-            private final Button deleteBtn = new Button("Delete");
-            private final javafx.scene.layout.HBox actionBox = new javafx.scene.layout.HBox(8, viewBtn, deleteBtn);
+            private final Button viewBtn = new Button();
+            private final Button deleteBtn = new Button();
 
             {
-                viewBtn.setStyle("-fx-background-color: #800000; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;");
-                deleteBtn.setStyle("-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;");
+                ImageView eyeIcon = createIcon("/com/example/findit/assets/ViewEye.png");
+                ImageView trashIcon = createIcon("/com/example/findit/assets/trash.png");
+
+                viewBtn.setGraphic(eyeIcon);
+                deleteBtn.setGraphic(trashIcon);
+                String transparentStyle = "-fx-background-color: transparent; -fx-cursor: hand;";
+                viewBtn.setStyle(transparentStyle);
+                deleteBtn.setStyle(transparentStyle);
 
                 viewBtn.setOnAction(e -> {
                     ReportedItem item = getTableView().getItems().get(getIndex());
@@ -85,11 +92,29 @@ public class ReportedItemsController implements Initializable {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                setGraphic(empty ? null : actionBox);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    javafx.scene.layout.HBox actionBox = new javafx.scene.layout.HBox(8, viewBtn, deleteBtn);
+                    actionBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                    setGraphic(actionBox);
+                }
             }
         });
     }
-
+    
+    private ImageView createIcon(String path) {
+        java.io.InputStream stream = getClass().getResourceAsStream(path);
+        if (stream == null) {
+            System.err.println("X Missing table icon: " + path);
+            return new ImageView(); 
+        }
+        ImageView imgView = new ImageView(new Image(stream));
+        imgView.setFitWidth(20);
+        imgView.setFitHeight(20);
+        imgView.setPreserveRatio(true);
+        return imgView;
+    }
     private void loadItems() {
         masterData.addAll(
             new ReportedItem("Lost", "Laptop", "Electronics", "2025-01-08", "Juan dela Cruz", "Library"),
