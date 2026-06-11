@@ -26,7 +26,6 @@ public class ReportedItemsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Tells the sidebar to highlight the Reported button!
         if (sidebarController != null) { sidebarController.setActiveTab("Reported"); }
         
         typeFilter.setItems(FXCollections.observableArrayList("All", "Lost", "Found"));
@@ -37,22 +36,105 @@ public class ReportedItemsController implements Initializable {
     }
 
     private void configureTableColumns() {
-        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colReportedBy.setCellValueFactory(new PropertyValueFactory<>("reportedBy"));
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
-        // (Action column logic remains unchanged)
+        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colType.setCellFactory(col -> new TableCell<>() {
+            private final Label badge = new Label();
+            
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    badge.setText(item);
+                    if (item.equalsIgnoreCase("Lost")) {
+                        badge.setStyle("-fx-background-color: #FFCDD2; -fx-text-fill: #C62828; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 12;");
+                    } else if (item.equalsIgnoreCase("Found")) {
+                        badge.setStyle("-fx-background-color: #C8E6C9; -fx-text-fill: #2E7D32; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 12;");
+                    }
+                    setGraphic(badge);
+                }
+            }
+        });
+
+        colAction.setCellFactory(col -> new TableCell<>() {
+            private final Button viewBtn = new Button("View");
+            private final Button deleteBtn = new Button("Delete");
+            private final javafx.scene.layout.HBox actionBox = new javafx.scene.layout.HBox(8, viewBtn, deleteBtn);
+
+            {
+                viewBtn.setStyle("-fx-background-color: #800000; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;");
+                deleteBtn.setStyle("-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;");
+
+                viewBtn.setOnAction(e -> {
+                    ReportedItem item = getTableView().getItems().get(getIndex());
+                    handleViewItem(item);
+                });
+
+                deleteBtn.setOnAction(e -> {
+                    ReportedItem item = getTableView().getItems().get(getIndex());
+                    handleDeleteItem(item);
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : actionBox);
+            }
+        });
     }
 
     private void loadItems() {
-        masterData.addAll(new ReportedItem("Lost", "Laptop", "Electronics", "2025-01-08", "Juan dela Cruz", "Library"));
+        masterData.addAll(
+            new ReportedItem("Lost", "Laptop", "Electronics", "2025-01-08", "Juan dela Cruz", "Library"),
+            new ReportedItem("Found", "Black Wallet", "Wallet", "2025-01-09", "Maria Santos", "Cafeteria")
+        );
     }
 
     private void wireSearchAndFilter() {
         filteredData = new FilteredList<>(masterData, p -> true);
         itemsTable.setItems(filteredData);
+
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> applyFilter());
+        typeFilter.valueProperty().addListener((obs, oldVal, newVal) -> applyFilter());
+    }
+
+    private void applyFilter() {
+        String search = searchField.getText().toLowerCase().trim();
+        String typeValue = typeFilter.getValue();
+
+        filteredData.setPredicate(item -> {
+            boolean matchesSearch = search.isEmpty()
+                    || item.getItemName().toLowerCase().contains(search)
+                    || item.getCategory().toLowerCase().contains(search)
+                    || item.getLocation().toLowerCase().contains(search)
+                    || item.getReportedBy().toLowerCase().contains(search);
+
+            boolean matchesType = "All".equals(typeValue)
+                    || item.getType().equalsIgnoreCase(typeValue);
+
+            return matchesSearch && matchesType;
+        });
+    }
+
+    private void handleViewItem(ReportedItem item) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Item Details");
+        alert.setHeaderText(item.getItemName());
+        alert.setContentText(
+                "Type: "        + item.getType()       + "\n" +
+                "Category: "    + item.getCategory()   + "\n" +
+                "Date: "        + item.getDate()        + "\n" +
+                "Reported By: " + item.getReportedBy() + "\n" +
+                "Location: "    + item.getLocation()
+        );
+        alert.showAndWait();
     }
 
     public static class ReportedItem {
@@ -64,4 +146,21 @@ public class ReportedItemsController implements Initializable {
         public String getCategory() { return category; } public String getDate() { return date; }
         public String getReportedBy() { return reportedBy; } public String getLocation() { return location; }
     }
+
+    private void handleDeleteItem(ReportedItem item) {
+        // CONFIRMATION DIALOG BEFORE DELETION
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Delete Confirmation");
+        confirmDialog.setHeaderText("Delete Report: " + item.getItemName());
+        confirmDialog.setContentText("Are you sure you want to delete this report? This action cannot be undone.");
+        confirmDialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                masterData.remove(item);
+                
+                // REMOVE COMMENT IF DATABASE HANDLES THIS FOR DELETION OF REPORTED ITEMS
+                // SQL 'DELETE FROM items WHERE id = ?' execution right here!
+            }
+        });
+    }
 }
+

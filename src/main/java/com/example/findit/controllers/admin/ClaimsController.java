@@ -17,9 +17,9 @@ public class ClaimsController implements Initializable {
     @FXML private AdminSidebarController sidebarController;
 
     @FXML private TextField searchField;
-    @FXML private ComboBox<String> statusFilter; // FIXED: Renamed to statusFilter
+    @FXML private ComboBox<String> statusFilter;
 
-    @FXML private TableView<ClaimRow> claimsTable; // FIXED: Renamed to claimsTable
+    @FXML private TableView<ClaimRow> claimsTable;
     @FXML private TableColumn<ClaimRow, String> colType, colItemName, colCategory, colDate, colReportedBy, colLocation, colAction;
 
     private final ObservableList<ClaimRow> masterData = FXCollections.observableArrayList();
@@ -27,37 +27,55 @@ public class ClaimsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // FIXED: Tells the sidebar to highlight the CLAIMS button!
         if (sidebarController != null) { sidebarController.setActiveTab("Claims"); }
-        
-        // FIXED: Claims use Status filters, not Lost/Found filters
         statusFilter.setItems(FXCollections.observableArrayList("All Status", "Pending", "Approved", "Rejected"));
         statusFilter.getSelectionModel().selectFirst();
         
         configureTableColumns();
-        loadItems();
+        loadClaims();
         wireSearchAndFilter();
     }
 
     private void configureTableColumns() {
-        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colReportedBy.setCellValueFactory(new PropertyValueFactory<>("reportedBy"));
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
-        
-        // FIXED: Restored the Approve/Reject Buttons for the Action Column!
+        colType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colType.setCellFactory(col -> new TableCell<>() {
+            private final Label badge = new Label();
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    badge.setText(item);
+                    if (item.equalsIgnoreCase("Unclaimed")) {
+                        badge.setStyle("-fx-background-color: #FFE0B2; -fx-text-fill: #E65100; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 12;");
+                    } else if (item.equalsIgnoreCase("Claimed")) {
+                        badge.setStyle("-fx-background-color: #E8EAF6; -fx-text-fill: #3F51B5; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 12;");
+                    } else {
+                        badge.setStyle("-fx-background-color: #E0E0E0; -fx-text-fill: #333333; -fx-font-weight: bold; -fx-padding: 3 10 3 10; -fx-background-radius: 12;");
+                    }
+                    setGraphic(badge);
+                }
+            }
+        });
         colAction.setCellFactory(col -> new TableCell<>() {
-            private final Button approveBtn = new Button("Approve");
-            private final Button rejectBtn  = new Button("Reject");
+            private final Button approveBtn = new Button("✔");
+            private final Button rejectBtn  = new Button("✖");
+            private final Button deleteBtn  = new Button("🗑");
 
             {
-                approveBtn.setStyle("-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;");
-                rejectBtn.setStyle("-fx-background-color: #C62828; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;");
-
+                approveBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #2E7D32; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;");
+                rejectBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #C62828; -fx-font-size: 16px; -fx-font-weight: bold; -fx-cursor: hand;");
+                deleteBtn.setStyle("-fx-background-color: transparent; -fx-text-fill: #D32F2F; -fx-font-size: 18px; -fx-cursor: hand;");
                 approveBtn.setOnAction(e -> handleApprove(getTableView().getItems().get(getIndex())));
                 rejectBtn.setOnAction(e  -> handleReject(getTableView().getItems().get(getIndex())));
+                deleteBtn.setOnAction(e  -> handleDeleteItem(getTableView().getItems().get(getIndex())));
             }
 
             @Override
@@ -66,19 +84,34 @@ public class ClaimsController implements Initializable {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    HBox box = new HBox(5, approveBtn, rejectBtn);
+                    javafx.scene.layout.HBox box = new javafx.scene.layout.HBox(2, approveBtn, rejectBtn, deleteBtn);
+                    box.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
                     setGraphic(box);
                 }
             }
         });
     }
 
-    private void loadItems() {
-        // FIXED: Using ClaimRow instead of ReportedItem so it has a "Status" field
+    private void loadClaims() {
         masterData.addAll(
-            new ClaimRow("Lost", "Laptop", "Electronics", "2025-01-08", "Juan dela Cruz", "Library", "Pending"),
-            new ClaimRow("Found", "Black Wallet", "Wallet", "2025-01-09", "Maria Santos", "Cafeteria", "Pending")
+                new ClaimRow("Unclaimed", "Laptop",       "Electronics", "2025-01-08", "Juan dela Cruz", "Library",   "Pending"),
+                new ClaimRow("Claimed",   "Black Wallet", "Wallet",      "2025-01-09", "Maria Santos",   "Cafeteria", "Pending"),
+                new ClaimRow("Unclaimed", "ID Card",      "Document",    "2025-01-10", "Jose Reyes",     "Gym",       "Approved")
         );
+    }
+
+    private void handleDeleteItem(ClaimRow item) {
+        Alert confirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDialog.setTitle("Delete Claim Confirmation");
+        confirmDialog.setHeaderText("Delete Claim: " + item.getItemName());
+        confirmDialog.setContentText("Are you sure you want to permanently delete this claim request?");
+        confirmDialog.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                masterData.remove(item);
+                
+                // TODO: Add backend SQL 'DELETE FROM claims WHERE claim_id = ?'
+            }
+        });
     }
 
     private void wireSearchAndFilter() {
@@ -118,7 +151,6 @@ public class ClaimsController implements Initializable {
         claimsTable.refresh();
     }
 
-    // FIXED: Custom model to support Claim Status
     public static class ClaimRow {
         private final String type, itemName, category, date, reportedBy, location;
         private String claimStatus;
@@ -135,4 +167,6 @@ public class ClaimsController implements Initializable {
         public String getClaimStatus() { return claimStatus; }
         public void setClaimStatus(String s) { this.claimStatus = s; }
     }
+
+
 }
