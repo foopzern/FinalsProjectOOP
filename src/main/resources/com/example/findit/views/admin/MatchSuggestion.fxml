@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="520.0" prefWidth="840.0" style="-fx-background-color: rgba(0, 0, 0, 0.45);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="520.0" prefWidth="840.0" style="-fx-background-color: rgba(0, 0, 0, 0.45);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.admin.MatchSuggestionController">
    <children>
-      <VBox layoutX="50.0" layoutY="45.0" prefHeight="430.0" prefWidth="740.0" spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 18;" AnchorPane.bottom.to="45.0" AnchorPane.left.to="50.0" AnchorPane.right.to="50.0" AnchorPane.top.to="45.0">
+      <VBox layoutX="50.0" layoutY="45.0" prefHeight="430.0" prefWidth="740.0" spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 18;" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="45.0">
          <padding>
             <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
          </padding>
@@ -23,7 +23,7 @@
                      <font><Font name="System Bold" size="24.0" /></font>
                   </Label>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="75.0" style="-fx-background-color: #FFE0B2; -fx-background-radius: 12; -fx-text-fill: #E65100;" text="Pending">
+                  <Label fx:id="statusBadge" alignment="CENTER" prefHeight="22.0" prefWidth="75.0" style="-fx-background-color: #FFE0B2; -fx-background-radius: 12; -fx-text-fill: #E65100;" text="Pending">
                      <font><Font name="System Bold" size="11.0" /></font>
                   </Label>
                </children>
@@ -40,10 +40,10 @@
                         <AnchorPane prefHeight="160.0" style="-fx-background-color: #F0F0F3; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" />
                         <VBox spacing="2.0">
                            <children>
-                              <Label text="Item Name" textFill="#222222"><font><Font name="System Bold" size="14.0" /></font></Label>
-                              <Label text="Reported by:" textFill="#777777"><font><Font size="12.0" /></font></Label>
-                              <Label text="Date:" textFill="#777777"><font><Font size="12.0" /></font></Label>
-                              <Label text="Location:" textFill="#777777"><font><Font size="12.0" /></font></Label>
+                              <Label fx:id="lostItemName" text="Item Name" textFill="#222222"><font><Font name="System Bold" size="14.0" /></font></Label>
+                              <Label fx:id="lostReportedBy" text="Reported by:" textFill="#777777"><font><Font size="12.0" /></font></Label>
+                              <Label fx:id="lostDate" text="Date:" textFill="#777777"><font><Font size="12.0" /></font></Label>
+                              <Label fx:id="lostLocation" text="Location:" textFill="#777777"><font><Font size="12.0" /></font></Label>
                            </children>
                            <padding><Insets left="2.0" /></padding>
                         </VBox>
@@ -58,10 +58,10 @@
                         <AnchorPane prefHeight="160.0" style="-fx-background-color: #F0F0F3; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" />
                         <VBox spacing="2.0">
                            <children>
-                              <Label text="Item Name" textFill="#222222"><font><Font name="System Bold" size="14.0" /></font></Label>
-                              <Label text="Reported by:" textFill="#777777"><font><Font size="12.0" /></font></Label>
-                              <Label text="Date:" textFill="#777777"><font><Font size="12.0" /></font></Label>
-                              <Label text="Location:" textFill="#777777"><font><Font size="12.0" /></font></Label>
+                              <Label fx:id="foundItemName" text="Item Name" textFill="#222222"><font><Font name="System Bold" size="14.0" /></font></Label>
+                              <Label fx:id="foundReportedBy" text="Reported by:" textFill="#777777"><font><Font size="12.0" /></font></Label>
+                              <Label fx:id="foundDate" text="Date:" textFill="#777777"><font><Font size="12.0" /></font></Label>
+                              <Label fx:id="foundLocation" text="Location:" textFill="#777777"><font><Font size="12.0" /></font></Label>
                            </children>
                            <padding><Insets left="2.0" /></padding>
                         </VBox>
@@ -75,10 +75,10 @@
             <HBox spacing="20.0" prefHeight="45.0">
                <VBox.margin><Insets top="15.0" /></VBox.margin>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="330.0" style="-fx-background-color: #00E676; -fx-background-radius: 8;" text="Confirm Match" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#handleConfirmMatch" prefHeight="44.0" prefWidth="330.0" style="-fx-background-color: #00E676; -fx-background-radius: 8; -fx-cursor: hand;" text="Confirm Match" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font><Font name="System Bold" size="14.0" /></font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="330.0" style="-fx-background-color: #EFEFEF; -fx-background-radius: 8;" text="Close" textFill="#333333" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#handleClose" prefHeight="44.0" prefWidth="330.0" style="-fx-background-color: #EFEFEF; -fx-background-radius: 8; -fx-cursor: hand;" text="Close" textFill="#333333" HBox.hgrow="ALWAYS">
                      <font><Font name="System Bold" size="14.0" /></font>
                   </Button>
                </children>
