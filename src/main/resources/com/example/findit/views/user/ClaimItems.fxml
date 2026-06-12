@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="720.0" style="-fx-background-color: rgba(0, 0, 0, 0.45);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="720.0" style="-fx-background-color: rgba(0, 0, 0, 0.45);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.user.ClaimItemsController">
    <children>
       <VBox layoutX="40.0" layoutY="35.0" prefHeight="350.0" prefWidth="640.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 18;" AnchorPane.bottom.to="35.0" AnchorPane.left.to="40.0" AnchorPane.right.to="40.0" AnchorPane.top.to="35.0">
          <padding>
@@ -40,7 +40,7 @@
                                     <Label text="*" textFill="RED" />
                                  </children>
                               </HBox>
-                              <TextField promptText="Full name" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
+                              <TextField fx:id="txtClaimantName" promptText="Full name" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
                            </children>
                         </VBox>
                         <VBox spacing="4.0">
@@ -51,7 +51,7 @@
                                     <Label text="*" textFill="RED" />
                                  </children>
                               </HBox>
-                              <TextField promptText="e.g., 2024-00000-SR-0" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
+                              <TextField fx:id="txtStudentNumber" promptText="e.g., 2024-00000-SR-0" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
                            </children>
                         </VBox>
                         <VBox spacing="4.0">
@@ -62,7 +62,7 @@
                                     <Label text="*" textFill="RED" />
                                  </children>
                               </HBox>
-                              <TextField promptText="Email or phone number" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
+                              <TextField fx:id="txtContact" promptText="Email or phone number" prefHeight="35.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
                            </children>
                         </VBox>
                      </children>
@@ -76,7 +76,7 @@
                               <Label text="*" textFill="RED" />
                            </children>
                         </HBox>
-                        <TextArea promptText="Describe how you can prove this item belongs to you..." wrapText="true" VBox.vgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
+                        <TextArea fx:id="txtProofDescription" promptText="Describe how you can prove this item belongs to you..." wrapText="true" VBox.vgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 5;" />
                      </children>
                   </VBox>
                </children>
@@ -85,10 +85,10 @@
             <HBox spacing="20.0" prefHeight="45.0">
                <VBox.margin> <Insets top="25.0" /> </VBox.margin>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="285.0" style="-fx-background-color: #800000; -fx-background-radius: 8;" text="Submit Claim" textFill="WHITE" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#handleSubmit" prefHeight="42.0" prefWidth="285.0" style="-fx-background-color: #800000; -fx-background-radius: 8; -fx-cursor: hand;" text="Submit Claim" textFill="WHITE" HBox.hgrow="ALWAYS">
                      <font> <Font name="System Bold" size="14.0" /> </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="285.0" style="-fx-background-color: #CCCCCC; -fx-background-radius: 8;" text="Cancel" textFill="#333333" HBox.hgrow="ALWAYS">
+                  <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="42.0" prefWidth="285.0" style="-fx-background-color: #CCCCCC; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel" textFill="#333333" HBox.hgrow="ALWAYS">
                      <font> <Font name="System Bold" size="14.0" /> </font>
                   </Button>
                </children>

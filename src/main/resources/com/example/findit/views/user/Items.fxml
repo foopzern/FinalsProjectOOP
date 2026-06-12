@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F4F4F6;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.user.UserDashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #F4F4F6;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.findit.controllers.user.ItemsController">
    
    <left>
       <fx:include source="DashboardSidebar.fxml" />
@@ -26,11 +16,14 @@
          <top>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" style="-fx-background-color: #800000;" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Items" textFill="WHITE">
+                  <Label text="Items" textFill="#ffcc00">
                      <font><Font name="System Bold" size="26.0" /></font>
-                     <HBox.margin><Insets left="30.0" /></HBox.margin>
+                     <HBox.margin><Insets /></HBox.margin>
                   </Label>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
          </top>
          <center>
@@ -38,8 +31,7 @@
                <padding><Insets bottom="25.0" left="30.0" right="30.0" top="25.0" /></padding>
                <children>
                   
-                  <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 8, 0, 0, 4);">
-                     <padding><Insets left="20.0" right="20.0" /></padding>
+                  <HBox alignment="CENTER_LEFT" prefHeight="70.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.04), 8, 0, 0, 4); -fx-padding: 15 20 15 20;">
                      <children>
                         <TextField prefHeight="40.0" prefWidth="280.0" promptText="Search items ..." style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 8;" />
                         <ComboBox prefHeight="40.0" prefWidth="240.0" promptText="All Categories" style="-fx-background-color: #FFFFFF; -fx-border-color: #CCCCCC; -fx-border-radius: 8;" />
@@ -60,34 +52,6 @@
                             <RowConstraints minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="210.0" vgrow="SOMETIMES" />
                           </rowConstraints>
-                           <children>
-                              
-                              <VBox prefHeight="210.0" spacing="8.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 10, 0, 0, 5);">
-                                 <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
-                                 <children>
-                                    <AnchorPane prefHeight="100.0" style="-fx-background-color: #E2E2E6; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" />
-                                    <Label text="Item Name" textFill="#222222"><font><Font name="System Bold" size="14.0" /></font></Label>
-                                    <VBox spacing="1.0">
-                                       <children>
-                                          <Label text="Category:" textFill="#777777"><font><Font size="11.0" /></font></Label>
-                                          <Label text="Date:" textFill="#777777"><font><Font size="11.0" /></font></Label>
-                                       </children>
-                                    </VBox>
-                                    <Label alignment="CENTER" prefHeight="18.0" prefWidth="55.0" style="-fx-background-color: #FCE4EC; -fx-background-radius: 10;" text="Status" textFill="#C2185B"><font><Font size="10.0" /></font></Label>
-                                 </children>
-                              </VBox>
-                              
-                              <VBox prefHeight="210.0" spacing="8.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.06), 10, 0, 0, 5);" GridPane.columnIndex="1">
-                                 <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
-                                 <children>
-                                    <AnchorPane prefHeight="100.0" style="-fx-background-color: #E2E2E6; -fx-background-radius: 10;" VBox.vgrow="ALWAYS" />
-                                    <Label text="Item Name" textFill="#222222"><font><Font name="System Bold" size="14.0" /></font></Label>
-                                    <VBox spacing="1.0"><children><Label text="Category:" textFill="#777777"><font><Font size="11.0" /></font></Label><Label text="Date:" textFill="#777777"><font><Font size="11.0" /></font></Label></children></VBox>
-                                    <Label alignment="CENTER" prefHeight="18.0" prefWidth="55.0" style="-fx-background-color: #FCE4EC; -fx-background-radius: 10;" text="Status" textFill="#C2185B"><font><Font size="10.0" /></font></Label>
-                                 </children>
-                              </VBox>
-                              
-                           </children>
                         </GridPane>
                      </content>
                   </ScrollPane>
